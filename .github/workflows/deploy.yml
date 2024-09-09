@@ -8,39 +8,39 @@ on:
 
 
 jobs:
-  deploy:
-    runs-on: self-hosted #self-hosted runner
-
-    steps:
-    # - name: clean up directory
-    #   run: sudo rm -rf /home/ubuntu/actions-runner/_work/backend//*
+#   deploy:
+#     runs-on: self-hosted #self-hosted runner
+#     needs: test
+#     steps:
+#     # - name: clean up directory
+#     #   run: sudo rm -rf /home/ubuntu/actions-runner/_work/backend//*
     
-    - name: Checkout code
-      uses: actions/checkout@v2
+#     - name: Checkout code
+#       uses: actions/checkout@v2
 
-    - name: Check Current Directory
-      run: pwd
+#     - name: Check Current Directory
+#       run: pwd
 
-    - name: Check running docker services
-      run: sudo docker ps
+#     - name: Check running docker services
+#       run: sudo docker ps
 
-    - name: Stop Docker Container
-      run: sudo docker stop $(sudo docker ps -a -q) || true
+#     - name: Stop Docker Container
+#       run: sudo docker stop $(sudo docker ps -a -q) || true
     
-    - name: Delete Docker Container
-      run: sudo docker rm $(sudo docker ps -a -q) || true
+#     - name: Delete Docker Container
+#       run: sudo docker rm $(sudo docker ps -a -q) || true
 
-    - name: Delete Docker Image
-      run: sudo docker rmi $(sudo docker images -q) || true
+#     - name: Delete Docker Image
+#       run: sudo docker rmi $(sudo docker images -q) || true
 
-    - name: retrieve secrets
-      run: echo ${{ secrets.GOOGLE_MAPS_API }} > .env
+#     - name: retrieve secrets
+#       run: echo ${{ secrets.GOOGLE_MAPS_API }} > .env
 
-    - name: Run the Docker Container
-      run: sudo docker-compose --file=docker-compose.local.yml up -d --build
+#     - name: Run the Docker Container
+#       run: sudo docker-compose --file=docker-compose.local.yml up -d --build
 
-  build:
-    name: Build
+  test:
+    name: test
     runs-on: self-hosted
     permissions: read-all
     steps:
