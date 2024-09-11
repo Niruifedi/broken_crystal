@@ -10,7 +10,7 @@ on:
 jobs:
   test:
     name: test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted 
     permissions: read-all
     steps:
       - name: actions
