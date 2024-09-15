@@ -1,13 +1,16 @@
 import { SecRunner } from '@sectester/runner';
 import { TestType } from '@sectester/scan';
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const generateToken = async (jwtType) => {
   const { headers } = await axios.post(
     `${process.env.SEC_TESTER_TARGET}/api/auth/jwt/${jwtType}/login`,
     {
       user: 'admin',
-      password: 'admin',
+      password: process.env.PASSWORD,
       op: 'basic'
     }
   );
