@@ -15,7 +15,7 @@ node {
                 def color = COLOR_MAP[currentBuild.currentResult] ?: 'warning' // Default to 'warning' if build result is not FAILURE or SUCCESS
                 slackSend (
                     color: color,
-                    channel: '#jenkins-build', #channel name
+                    channel: '#jenkins-build'
                     message: "${currentBuild.currentResult} Job ${env.JOB_NAME}\nbuild ${env.BUILD_NUMBER}\nMore info at: ${env.BUILD_URL}"
                 )
             }
